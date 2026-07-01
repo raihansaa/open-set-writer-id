@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+message: >-
+  If you use this code or the open-set CVL / Historical-WI protocols, please
+  cite the paper below.
+title: >-
+  Cross-Dataset Transfer in Open-Set Writer Identification: From Hand-Drawn
+  Circles to Handwritten Pages
+authors:
+  - given-names: Md
+    family-names: Raihan
+    affiliation: "Pattern Recognition Lab, Friedrich-Alexander-Universität Erlangen-Nürnberg, Germany"
+    email: md.raihan@fau.de
+  - given-names: Thomas
+    family-names: Gorges
+    affiliation: "Pattern Recognition Lab, Friedrich-Alexander-Universität Erlangen-Nürnberg, Germany"
+    email: thomas.gorges@fau.de
+  - given-names: Lukas
+    family-names: Hüttner
+    affiliation: "Pattern Recognition Lab, Friedrich-Alexander-Universität Erlangen-Nürnberg, Germany"
+    email: lukas.huettner@fau.de
+  - given-names: Vincent
+    family-names: Christlein
+    affiliation: "Pattern Recognition Lab, Friedrich-Alexander-Universität Erlangen-Nürnberg, Germany"
+    email: vincent.christlein@fau.de
+preferred-citation:
+  type: conference-paper
+  title: >-
+    Cross-Dataset Transfer in Open-Set Writer Identification: From Hand-Drawn
+    Circles to Handwritten Pages
+  authors:
+    - given-names: Md
+      family-names: Raihan
+    - given-names: Thomas
+      family-names: Gorges
+    - given-names: Lukas
+      family-names: Hüttner
+    - given-names: Vincent
+      family-names: Christlein
+  year: 2026
+  collection-title: "ICDAR 2026 Workshop on Machine Learning (WML)"
+  conference:
+    name: "6th ICDAR Workshop on Machine Learning (WML 2026)"
+    city: Vienna
+    country: AT
+    date-start: "2026-09-03"
+  url: "https://icdarwml2026.midasoc.org/"
+  # TODO on publication: pages, doi

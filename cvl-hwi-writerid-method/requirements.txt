@@ -1,0 +1,10 @@
+# Core dependencies for the CVL / Historical-WI open-set writer-ID pipeline.
+# DINOv2 ViT-B/14-reg is fetched at runtime via torch.hub (facebookresearch/dinov2).
+torch>=2.0
+torchvision
+numpy
+pandas
+scikit-learn
+pillow
+opencv-python
+tqdm
