@@ -1,8 +1,7 @@
-# Open-Set Writer Identification — From Hand-Drawn Circles to Handwritten Pages
+# Cross-Dataset Transfer in Open-Set Writer Identification: From Hand-Drawn Circles to Handwritten Pages
 
-Code, open-set data splits, and reproduction scripts for the WML 2026 paper:
+Official code, open-set data splits, and reproduction scripts for our **WML 2026** paper.
 
-> **Cross-Dataset Transfer in Open-Set Writer Identification: From Hand-Drawn Circles to Handwritten Pages**
 > Md Raihan, Thomas Gorges, Lukas Hüttner, Vincent Christlein
 > *Pattern Recognition Lab, Friedrich-Alexander-Universität Erlangen-Nürnberg, Germany*
 > Accepted at the [6th ICDAR Workshop on Machine Learning (WML 2026)](https://icdarwml2026.midasoc.org/) — Vienna, Austria, 3 September 2026.
@@ -14,7 +13,9 @@ tackles the harder, more realistic **open-set** setting — query pages may come
 never seen at enrollment — under a **few-shot** budget of only **3 enrollment pages per
 writer**, and asks how well a *single* recipe **transfers across datasets**: from the
 hand-drawn circles of the ICDAR **CircleID** competition to full handwritten pages in
-**CVL** (modern) and **Historical-WI** (historical).
+**CVL** (modern) and **Historical-WI** (historical). CircleID poses writer identification from
+a *single hand-drawn circle* — a minimal, content-free primitive — a deliberately stringent
+starting point for testing whether one open-set recipe generalises to information-rich handwriting.
 
 The method is a frozen **DINOv2 ViT-B/14** backbone with **LoRA**, **NetVLAD** aggregation,
 and a **multi-prototype ArcFace** head with hard-negative mining, followed by one of three
@@ -40,7 +41,7 @@ the 47.02% competition-day submission.
 |--------|----------|
 | [`cvl-hwi-writerid-method/`](cvl-hwi-writerid-method/) | The open-set writer-ID method for **CVL** and **Historical-WI**: DINOv2 + LoRA + NetVLAD + multi-prototype ArcFace, plus the three rejection rules. Training, embedding extraction, post-hoc refinement, and evaluation. See its [README](cvl-hwi-writerid-method/README.md) and [REPRODUCE](cvl-hwi-writerid-method/REPRODUCE.md). |
 | [`splits/`](splits/) | The **open-set split protocol**: deterministic builders (`build_cvl_splits.py`, `build_hwi_splits.py`), a convention-agnostic verifier (`verify_splits.py`), and the ready-to-use split manifests (`cvl_splits/`, `hwi_splits/`) that define the Known / Pseudo-unknown / Unknown pools. |
-| [`circleid/`](circleid/) | Reproduction archive for the **CircleID** (hand-drawn circles) half of the paper — the code behind each row of Table 2, from the competition-day submission to the final configuration. See its [README](circleid/README.md). |
+| [`circleid/`](circleid/) | Reproduction archive for the **CircleID** (hand-drawn circles) half of the paper — writer identification from a single hand-drawn circle. Isolates the exact code behind each row of **Table 2**, tracing the private-leaderboard result from the **47.02%** competition-day submission to the final **65.17%** configuration (organised as `precompetition/` and `post_competition/` stages). See its [README](circleid/README.md). |
 
 ## Quickstart
 
