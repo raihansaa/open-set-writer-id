@@ -10,11 +10,6 @@ runs/
 *.pt
 *.ckpt
 
-# Raw datasets — NOT redistributed (download from official sources, see README)
-cvl/cvl/
-hwi/hwi_test/
-hwi/hwi_train/
-
 # OS / editor
 .DS_Store
 .idea/
