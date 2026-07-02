@@ -80,19 +80,30 @@ python train_writerid.py --data-dir hwi --splits-dir ../splits/hwi_splits --out-
 This writes `runs/<...>/embeddings_seed42.npz` (train/val/test page embeddings + cosines).
 *Vanilla baseline* (Table 3): use `--lora-blocks 6 --multi-proto-k 1`.
 
-**2 — Open-set rejection (rules A/B/C)**
+**2 — Post-hoc refinement** — **required** (this is what lifts CVL AUROC ~0.55→0.85)
 
 ```bash
-python submit_writerid.py --emb runs/cvl_seed42/embeddings_seed42.npz --out-dir runs/cvl_seed42/submissions
+python posthoc_refine.py --emb runs/cvl_seed42/embeddings_seed42.npz --aggregate gmp --rerank   # CVL
+python posthoc_refine.py --emb runs/hwi_seed42/embeddings_seed42.npz --aggregate mean            # HWI
+```
+
+This writes `embeddings_seed42_refined.npz`; run rejection and evaluation on the **refined** file.
+
+**3 — Open-set rejection (rules A/B/C)**
+
+```bash
+python submit_writerid.py --emb runs/cvl_seed42/embeddings_seed42_refined.npz --out-dir runs/cvl_seed42/submissions
 ```
 
 Runs the rejection method zoo — per-writer MP-Mahalanobis (rule A), cluster K-sweep (rule B), and
 joint train+test clustering (rule C) — selecting each threshold on the validation Pseudo-unknown pool.
+Rule C (the CVL-headline rule) is run separately via `cluster_joint.py`; see
+[REPRODUCE.md](REPRODUCE.md) for the full step-by-step reproduction.
 
-**3 — Evaluate**
+**4 — Evaluate**
 
 ```bash
-python eval_metrics.py --emb runs/cvl_seed42/embeddings_seed42.npz --sub-dir runs/cvl_seed42/submissions
+python eval_metrics.py --emb runs/cvl_seed42/embeddings_seed42_refined.npz --sub-dir runs/cvl_seed42/submissions
 ```
 
 Reports OS-Top1, Known-Top1, and unknown-rejection AUROC per method.

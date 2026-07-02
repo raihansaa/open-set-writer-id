@@ -70,7 +70,7 @@ Pseudo-unknown pool only:
 ## 3. Evaluate
 
 ```bash
-python eval_metrics.py --emb runs/cvl_seed42/embeddings_seed42.npz \
+python eval_metrics.py --emb runs/cvl_seed42/embeddings_seed42_refined.npz \
   --sub-dir runs/cvl_seed42/submissions
 ```
 
