@@ -12,7 +12,7 @@ CircleID private-leaderboard result, organised exactly as the paper narrates it:
 Every script here corresponds to a **Table 2 row** (or the §4.2 sub-prototype alternative).
 Experimental dead-ends that the paper does **not** mention (HDBSCAN, k-reciprocal, ProSub,
 SGR, VLAD-refit, multi-seed vote, TTA, power-norm, sub-center ArcFace, RMD, …) are **not**
-copied here — they remain in the original `fresh_start/` tree (see §6).
+copied here — they remain in the original directory (see §6).
 
 > The CVL and Historical-WI transfer experiments (paper §5–§7) live in the sibling [`../cvl-hwi-writerid-method/`](../cvl-hwi-writerid-method/) and
 > [`../splits/`](../splits/) folders of this repository — this `circleid/` folder is the hand-drawn-circles half only.
@@ -150,7 +150,7 @@ python cluster_cv_calibrated_scorer.py    # Row 12 → submissions_cv_scorer/A_r
 
 Each run rewrites its `submissions_*/` CSVs; diff against the preserved reference CSVs in §2 to
 confirm an exact match. This archive is the **index** of which script produces which Table-2 row;
-each script writes its submission CSV next to itself — no `fresh_start/` layout needed.
+each script writes its submission CSV next to itself — no layout needed.
 
 ### Mode B — full retrain from images (GPU, ~5–8 h on RTX 4060)
 
@@ -195,8 +195,7 @@ python post_competition/submit.py                 # max-cos unk70 baseline = 0.5
   k-reciprocal, ProSub, SGR, VLAD-refit, multi-seed vote, 3-seed, TTA, adaptive gating,
   iterative-proto, OOD anchors, linkage probe, exemplar-SVM, softmax-max, transductive,
   fine-tune variants, power-norm, sub-center-ArcFace + morph, CV-recover, RMD scorer,
-  ensemble vote) and the `verify_embeddings.py` sanity utility — all remain in the original
-  `fresh_start/` directory. The WML paper does not reference them, so they are out of scope here.
+  ensemble vote) and the `verify_embeddings.py` sanity utility — all remain in the original directory. The WML paper does not reference them, so they are out of scope here.
 - **CVL / Historical-WI transfer pipeline** (paper §5–§7): now in the sibling [`../cvl-hwi-writerid-method/`](../cvl-hwi-writerid-method/) and [`../splits/`](../splits/) folders (this folder is circles-only).
 - **Large binary artifacts** (`.npz`, `.pt`, the image dataset, reference CSVs): left in place;
   §4 lists exactly where each lives. This archive is scripts + docs only (~0.4 MB).
