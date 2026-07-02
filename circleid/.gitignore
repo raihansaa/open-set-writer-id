@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Run outputs (the post-hoc scripts generate these; inputs live in the main tree, see README §4)
+submissions_*/
+outputs_*/
+checkpoints_*/
+*.npz
+*.pt
+*.ckpt
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/

@@ -10,7 +10,7 @@ Official code, open-set data splits, and reproduction scripts for our **WML 2026
 
 Writer identification is usually studied as a **closed-set** retrieval problem. This work
 tackles the harder, more realistic **open-set** setting — query pages may come from writers
-never seen at enrollment — under a **few-shot** budget of only **3 enrollment pages per
+never seen at enrollment — under a tight budget of only **3 enrollment pages per
 writer**, and asks how well a *single* recipe **transfers across datasets**: from the
 hand-drawn circles of the ICDAR **CircleID** competition to full handwritten pages in
 **CVL** (modern) and **Historical-WI** (historical). CircleID poses writer identification from

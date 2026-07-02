@@ -116,10 +116,16 @@ gradient checkpointing at 224×224, batch size 32.
 ## Citation
 
 ```bibtex
-TODO: add BibTeX upon acceptance
+@inproceedings{raihan2026crossdataset,
+  title     = {Cross-Dataset Transfer in Open-Set Writer Identification:
+               From Hand-Drawn Circles to Handwritten Pages},
+  author    = {Raihan, Md and Gorges, Thomas and H\"uttner, Lukas and Christlein, Vincent},
+  booktitle = {6th ICDAR Workshop on Machine Learning (WML)},
+  address   = {Vienna, Austria},
+  year      = {2026}
+}
 ```
 
 ## License
 
-Released under the MIT License — see [`LICENSE`](LICENSE). Replace "The Authors" in the copyright
-line with your name(s) upon de-anonymization.
+Released under the MIT License — see [`LICENSE`](LICENSE).

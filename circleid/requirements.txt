@@ -1,0 +1,10 @@
+# CircleID reproduction dependencies (Python >= 3.10).
+# DINOv2 ViT-B/14-reg is fetched at runtime via torch.hub (facebookresearch/dinov2).
+# The post-hoc cascade (Table 2 Rows 4-12) needs only numpy / pandas / scikit-learn;
+# torch + torchvision + opencv are needed only to (re)train the trunk (Rows 1-3).
+torch>=2.0
+torchvision
+numpy
+pandas
+scikit-learn
+opencv-python
