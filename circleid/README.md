@@ -51,20 +51,20 @@ Competition submission used **RGB** input; the post-deadline gains came from the
 Each row is one cumulative refinement. **Score = OS-Top-1 on the CircleID private Kaggle
 leaderboard** (42.81% of the test set are unseen writers; random ≈ 0.30).
 
-| # | Paper change | Score | Script (this archive) | Reference output CSV (original tree) |
-|--:|---|--:|---|---|
-| 1 | DINOv2+LoRA+NetVLAD+ArcFace+PCA-Maha — **RGB final submission** | **47.02** | `precompetition/train_v4.py` → `precompetition/submit_v4_advanced.py` | `outputs_v4/submission_t1_baseline_pca64_unk70pct.csv` |
-| 2 | + Skeleton distance-transform input | 52.1 | `post_competition/train.py --use-skeleton` → `post_competition/submit.py` | `fresh_start/outputs_skeleton/submission_unk70pct.csv` |
-| 3 | + Two-seed ensemble (seeds 42 + 137) | 52.1 | `post_competition/train.py` (both seeds) | — |
-| 4 | + Per-writer min-Mahalanobis refinement | 52.1 | `post_competition/perwriter_maha_submit.py` | `fresh_start/submissions_perwriter_maha/` |
-| 5 | + Cluster all test (K=44), per-cluster Maha | 58.6 | `post_competition/cluster_ood_submit.py` | `fresh_start/submissions_cluster_ood/` |
-| 6 | + Keep top-6 clusters, reject rest as −1 | 62.3 | `post_competition/cluster_ood_variants.py` | `fresh_start/submissions_cluster_variants/` |
-| 7 | + One writer per cluster (centroid→nearest proto) | 63.2 | `post_competition/cluster_writer_assign.py` | `fresh_start/submissions_cluster_writer_assign/` |
-| 8 | + Per-sample gating (T=0.10) | **63.220** | `post_competition/cluster_gated_assign.py` | `fresh_start/submissions_gated_assign/gated_T0100.csv` |
-| 9 | + PCA-Mahalanobis / sub-prototype re-scoring *(matched, reverted)* | 64.996 | `post_competition/cluster_pca_maha.py` · `cluster_subproto.py` | `fresh_start/submissions_pca_maha/` · `submissions_subproto/` |
-| 10 | + **K-sweep tuning (K=60, keep-7)** | **64.996** | `post_competition/cluster_k_sweep.py` | `fresh_start/submissions_k_sweep/K060_keep07_gated.csv` |
-| 11 | + Positive–negative prototype gate (m=0) | 65.045 | `post_competition/cluster_posthoc_3experiments.py` | `fresh_start/submissions_posthoc_3exp/03_pn_gate_m000.csv` |
-| 12 | + **CV-calibrated 7-feature rejection scorer** | **65.166** | `post_competition/cluster_cv_calibrated_scorer.py` | `fresh_start/submissions_cv_scorer/A_reject_pk_lt_025.csv` |
+| # | Paper change | Score | Script (this archive) |
+|--:|---|--:|---|
+| 1 | DINOv2+LoRA+NetVLAD+ArcFace+PCA-Maha — **RGB final submission** | **47.02** | `precompetition/train_v4.py` → `precompetition/submit_v4_advanced.py` |
+| 2 | + Skeleton distance-transform input | 52.1 | `post_competition/train.py --use-skeleton` → `post_competition/submit.py` |
+| 3 | + Two-seed ensemble (seeds 42 + 137) | 52.1 | `post_competition/train.py` (both seeds) |
+| 4 | + Per-writer min-Mahalanobis refinement | 52.1 | `post_competition/perwriter_maha_submit.py` |
+| 5 | + Cluster all test (K=44), per-cluster Maha | 58.6 | `post_competition/cluster_ood_submit.py` |
+| 6 | + Keep top-6 clusters, reject rest as −1 | 62.3 | `post_competition/cluster_ood_variants.py` |
+| 7 | + One writer per cluster (centroid→nearest proto) | 63.2 | `post_competition/cluster_writer_assign.py` |
+| 8 | + Per-sample gating (T=0.10) | **63.220** | `post_competition/cluster_gated_assign.py` |
+| 9 | + PCA-Mahalanobis / sub-prototype re-scoring *(matched, reverted)* | 64.996 | `post_competition/cluster_pca_maha.py` · `cluster_subproto.py` |
+| 10 | + **K-sweep tuning (K=60, keep-7)** | **64.996** | `post_competition/cluster_k_sweep.py` |
+| 11 | + Positive–negative prototype gate (m=0) | 65.045 | `post_competition/cluster_posthoc_3experiments.py` |
+| 12 | + **CV-calibrated 7-feature rejection scorer** | **65.166** | `post_competition/cluster_cv_calibrated_scorer.py` |
 
 **Headline:** Row 12 = **0.65166 private** > published winner I-Signing **0.648**.
 Competition-day rank: **9 / 113** at 47.02% (paper footnote 1).
@@ -78,7 +78,7 @@ The two biggest jumps are **skeleton-DT (Row 2, +5.1pp)** and the
 ```
 circleid/
 ├── README.md                 ← this file (Table 2 map + reproduction modes)
-├── MANIFEST.md               ← every script: original path, Table-2 row, score
+├── MANIFEST.md               ← every script: Table-2 row, score, role
 ├── precompetition/           ← Row 1, the RGB 47.02% competition submission
 │   ├── train_v4.py
 │   └── submit_v4_advanced.py
@@ -123,13 +123,13 @@ python post_competition/cluster_cv_calibrated_scorer.py   # Row 12, the final 0.
 
 ### Inputs the post-hoc chain needs (obtained separately; not in this repo)
 
-| Input | Original path | Size |
-|---|---|---|
-| Data CSVs (train / additional_train / test) | `icdar-2026-circleid-writer-identification/*.csv` | ~2 MB |
-| Skeleton trunk embeddings (seeds 42, 137) | `fresh_start/outputs_skeleton/embeddings_seed_{42,137}.npz` | ~195 MB |
-| Skeleton checkpoints (for re-extraction only) | `fresh_start/checkpoints_skeleton/final_seed_{42,137}.pt` | ~925 MB |
-| RGB (v4) embeddings — Row 1 | `outputs_v4/embeddings_seed_{42,137}.npz` | ~195 MB |
-| Circle images (for full retrain only) | `icdar-2026-circleid-writer-identification/images/` | ~510 MB |
+| Input | Size |
+|---|---|
+| Data CSVs (train / additional_train / test) | ~2 MB |
+| Skeleton trunk embeddings (seeds 42, 137) | ~195 MB |
+| Skeleton checkpoints (for re-extraction only) | ~925 MB |
+| RGB (v4) embeddings — Row 1 | ~195 MB |
+| Circle images (for full retrain only) | ~510 MB |
 
 > NPZ schema: `train_emb (34650,512)` per-patch, `train_labels (34650,)`,
 > `test_emb (5905,512)` pooled, `test_cosine (5905,44)`. Embedding dim is **512** (projection
