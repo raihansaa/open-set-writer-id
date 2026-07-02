@@ -74,7 +74,7 @@ If you use this code or the open-set CVL / Historical-WI protocols, please cite:
 }
 ```
 
-A machine-readable [`CITATION.cff`](cvl-hwi-writerid-method/CITATION.cff) is also provided.
+A machine-readable [`CITATION.cff`](CITATION.cff) is also provided.
 
 ## License
 

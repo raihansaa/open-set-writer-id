@@ -45,6 +45,9 @@ import pandas as pd
 from sklearn.metrics import balanced_accuracy_score, roc_auc_score
 
 
+_trapz = np.trapezoid if hasattr(np, "trapezoid") else np.trapz
+
+
 _UNK_RE = re.compile(r"_unk\d+$")
 
 
@@ -180,7 +183,7 @@ def oscr_metrics(test_cosine: np.ndarray, writers: np.ndarray,
         return {"OSCR_AUC": float("nan"), "DIR_FAR1": float("nan"),
                 "DIR_FAR5": float("nan")}
     out = {
-        "OSCR_AUC": float(np.trapezoid(dir_, fpr)),           # integral of DIR over FPR
+        "OSCR_AUC": float(_trapz(dir_, fpr)),                 # integral of DIR over FPR
         "DIR_FAR1": float(np.interp(0.01, fpr, dir_)),    # OSCR y at FPR=1%
         "DIR_FAR5": float(np.interp(0.05, fpr, dir_)),    # OSCR y at FPR=5%
     }
@@ -189,7 +192,7 @@ def oscr_metrics(test_cosine: np.ndarray, writers: np.ndarray,
 
         def _oscr(idx):
             f, d = oscr_curve(score[idx], is_known_correct[idx], is_unknown[idx])
-            return float(np.trapezoid(d, f)) if f is not None else float("nan")
+            return float(_trapz(d, f)) if f is not None else float("nan")
 
         out["OSCR_AUC_lo"], out["OSCR_AUC_hi"] = cluster_bootstrap_ci(
             _oscr, test_true, n_boot)
